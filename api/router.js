@@ -96,16 +96,25 @@ router.post('/profile', (req, res, next)=> {
           err.status = 400;
           return next(err);
         } else {
-          let profileData = {
-            phone: req.body.phone,
-            country: req.body.country
-          };
-          User.save(profileData, function (error, result) {
-            if (error) {
-              return next(error);
-            } else {
-              return res.redirect('/profile');
-            }
+          let phone = req.body.phone.trim();
+          let country = req.body.country.trim();
+
+          if(phone) {
+            user.phone = phone;
+          } else {
+            req.flash('error', 'One or more fields are empty');
+            return res.redirect('/profile');
+          }
+
+          if (country) {
+            user.country = country;
+          } else {
+            req.flash('error', 'One or more fields are empty');
+            return res.redirect('/profile');
+          }
+
+          User.save(function (err) {
+            res.redirect('/profile/');
           });
         }
       }

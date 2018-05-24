@@ -24,12 +24,10 @@ const UserSchema = new Schema({
     required: true,
   },
   phone: {
-    type: Number,
-    required: true,
+    type: Number
   },
   country: {
-    type: String,
-    required: true,
+    type: String
   }
 });
 
