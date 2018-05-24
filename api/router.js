@@ -100,11 +100,11 @@ router.post('/profile', (req, res, next)=> {
             phone: req.body.phone,
             country: req.body.country
           };
-          User.update(profileData, function (error, result) {
+          User.save(profileData, function (error, result) {
             if (error) {
               return next(error);
             } else {
-              res.send(result);
+              return res.redirect('/profile');
             }
           });
         }
