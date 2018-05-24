@@ -67,7 +67,7 @@ router.get('/profile', (req, res, next)=> {
           err.status = 400;
           return next(err);
         } else {
-          rreturn res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<h2>Phone: </h2>' + user.phone + '<h2>Country: </h2>' + user.country + '<br><a type="button" href="/logout">Logout</a>')
+          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<h2>Phone: </h2>' + user.phone + '<h2>Country: </h2>' + user.country + '<br><a type="button" href="/logout">Logout</a>')
         }
       }
     });

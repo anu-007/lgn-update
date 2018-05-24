@@ -6,7 +6,7 @@ const routes          = require('./api/router');
 const session         = require('express-session');
 const MongoStore      = require('connect-mongo')(session);
 
-mongoose.connect('mongodb://anu-007:lgn-profile@ds133630.mlab.com:33630/lgn-profile', { useMongoClient: true });
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, { useMongoClient: true });
 mongoose.Promise = global.Promise;
 
 const db = mongoose.connection;
