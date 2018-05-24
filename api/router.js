@@ -106,14 +106,12 @@ router.post('/profile', (req, res, next)=> {
             user.phone = phone;
           } else {
             req.flash('error', 'One or more fields are empty');
-            return res.redirect('/profile');
           }
 
           if (country) {
             user.country = country;
           } else {
             req.flash('error', 'One or more fields are empty');
-            return res.redirect('/profile');
           }
 
           User.update(user, (err)=> {
