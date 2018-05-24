@@ -26,6 +26,8 @@ router.post('/register', (req, res, next)=> {
       username: req.body.username,
       password: req.body.password,
       passwordConf: req.body.passwordConf,
+      phone: null,
+      country: null
     }
 
     User.create(userData, function (error, user) {
@@ -56,6 +58,7 @@ router.post('/register', (req, res, next)=> {
 })
 
 router.get('/profile', (req, res, next)=> {
+  console.log(req.ip);
   let ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
   User.findById(req.session.userId)
     .exec(function (error, user) {
@@ -113,7 +116,7 @@ router.post('/profile', (req, res, next)=> {
             return res.redirect('/profile');
           }
 
-          User.save(function (err) {
+          User.update(user, (err)=> {
             res.redirect('/profile/');
           });
         }
