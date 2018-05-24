@@ -87,8 +87,8 @@ router.get('/logout', (req, res, next)=> {
 });
 
 router.post('/profile', (req, res, next)=> {
+  console.log(req.body);
   let profileData = {
-    username: req.body.username,
     phone: req.body.phone,
     country: req.body.country
   };
@@ -96,7 +96,7 @@ router.post('/profile', (req, res, next)=> {
     if (error) {
       return next(error);
     } else {
-      console.log('info added');
+      res.send(result);
     }
   });
 });
