@@ -52,7 +52,7 @@ UserSchema.statics.authenticate = function (email, password, callback) {
 }
 
 UserSchema.pre('save', function (next) {
-  var user = this;
+  let user = this;
   bcrypt.hash(user.password, 10, function (err, hash) {
     if (err) {
       return next(err);

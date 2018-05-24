@@ -10,7 +10,7 @@ router.get('/', (req, res, next)=> {
 
 router.post('/register', (req, res, next)=> {
   if (req.body.password !== req.body.passwordConf) {
-    var err = new Error('Passwords do not match.');
+    let err = new Error('Passwords do not match.');
     err.status = 400;
     res.send("passwords dont match");
     return next(err);
@@ -21,7 +21,7 @@ router.post('/register', (req, res, next)=> {
     req.body.password &&
     req.body.passwordConf) {
 
-    var userData = {
+    let userData = {
       email: req.body.email,
       username: req.body.username,
       password: req.body.password,
@@ -42,7 +42,7 @@ router.post('/register', (req, res, next)=> {
   } else if (req.body.logemail && req.body.logpassword) {
     User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
       if (error || !user) {
-        var err = new Error('Wrong email or password.');
+        let err = new Error('Wrong email or password.');
         err.status = 401;
         return next(err);
       } else {
@@ -51,7 +51,7 @@ router.post('/register', (req, res, next)=> {
       }
     });
   } else {
-    var err = new Error('All fields required.');
+    let err = new Error('All fields required.');
     err.status = 400;
     return next(err);
   }
@@ -66,7 +66,7 @@ router.get('/profile', (req, res, next)=> {
         return next(error);
       } else {
         if (user === null) {
-          var err = new Error('Not authorized! Go back!');
+          let err = new Error('Not authorized! Go back!');
           err.status = 400;
           return next(err);
         } else {
@@ -95,7 +95,7 @@ router.post('/profile', (req, res, next)=> {
         return next(error);
       } else {
         if (user === null) {
-          var err = new Error('Not authorized! Go back!');
+          let err = new Error('Not authorized! Go back!');
           err.status = 400;
           return next(err);
         } else {
@@ -105,13 +105,13 @@ router.post('/profile', (req, res, next)=> {
           if(phone) {
             user.phone = phone;
           } else {
-            req.flash('error', 'One or more fields are empty');
+            req.send('error', 'One or more fields are empty');
           }
 
           if (country) {
             user.country = country;
           } else {
-            req.flash('error', 'One or more fields are empty');
+            req.send('error', 'One or more fields are empty');
           }
 
           User.update(user, (err)=> {
