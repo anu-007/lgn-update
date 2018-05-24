@@ -58,7 +58,6 @@ router.post('/register', (req, res, next)=> {
 })
 
 router.get('/profile', (req, res, next)=> {
-  console.log(req.ip);
   let ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
   User.findById(req.session.userId)
     .exec(function (error, user) {
