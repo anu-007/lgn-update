@@ -22,6 +22,14 @@ const UserSchema = new Schema({
   passwordConf: {
     type: String,
     required: true,
+  },
+  phone: {
+    type: Number,
+    required: true,
+  },
+  country: {
+    type: String,
+    required: true,
   }
 });
 

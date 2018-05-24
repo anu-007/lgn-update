@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const UserInfo = require('../models/userinfo');
 
 router.get('/', (req, res, next)=> {
   res.send({
@@ -87,6 +86,21 @@ router.get('/logout', (req, res, next)=> {
 });
 
 router.post('/profile', (req, res, next)=> {
+  User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        if (user === null) {
+          var err = new Error('Not authorized! Go back!');
+          err.status = 400;
+          return next(err);
+        } else {
+          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<h2>Phone: </h2>' + user.phone + '<h2>Country: </h2>' + user.country + '<br><a type="button" href="/logout">Logout</a>')
+        }
+      }
+  });
+
   console.log(req.body);
   let profileData = {
     phone: req.body.phone,
